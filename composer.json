@@ -17,6 +17,7 @@
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.2",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.2",
         "laravel/pail": "^1.1",
@@ -54,6 +55,9 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "regenerate-ide-helper-data": [
+            "@php artisan ide-helper:regenerate --ansi"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
