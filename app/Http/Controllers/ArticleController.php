@@ -22,7 +22,7 @@ class ArticleController extends Controller
                     ->with('author:id,name')
                     ->latest()
                     ->select('id', 'user_id', 'status', 'title', 'description', 'created_at')
-                    ->paginate(10)
+                    ->paginate($request->query('per_page', 10))
                     ->withQueryString()
             ),
         ]);
