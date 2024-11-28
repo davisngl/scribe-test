@@ -1,12 +1,18 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 
 defineOptions({ layout: AuthenticatedLayout });
 
 defineProps({
     articles: { type: Object },
 });
+
+const deleteArticle = (article) => {
+    if (confirm('Are you sure you want to delete this article?')) {
+        router.delete(route('articles.destroy', article));
+    }
+};
 </script>
 
 <template>
@@ -24,6 +30,10 @@ defineProps({
                     class="rounded-sm border px-2 py-1 text-gray-500 transition-colors hover:border-blue-600 hover:text-blue-600"
                     :href="route('articles.edit', article)"
                 >Edit</Link>
+            </div>
+
+            <div v-if="article.can.delete">
+                <button @click="deleteArticle(article)">Delete</button>
             </div>
         </div>
     </div>
