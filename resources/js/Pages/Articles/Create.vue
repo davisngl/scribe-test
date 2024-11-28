@@ -6,8 +6,8 @@ import TextInput from '@/Components/TextInput.vue';
 import { router, useForm } from '@inertiajs/vue3';
 import TextArea from '@/Components/TextArea.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { isIn, isMax, isMin, isRequired } from "intus/rules";
-import intus from "intus";
+import { isIn, isMax, isMin, isRequired } from 'intus/rules';
+import intus from 'intus';
 
 defineOptions({
     layout: AuthenticatedLayout,
@@ -36,7 +36,7 @@ const submit = () => {
     if (validation.passes()) {
         form.post(route('articles.store', props.article));
     } else {
-        form.setError(validation.errors())
+        form.setError(validation.errors());
     }
 };
 
@@ -51,7 +51,7 @@ const navigateBack = () => {
     } else {
         router.visit(route('articles.index'));
     }
-}
+};
 </script>
 
 <template>

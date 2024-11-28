@@ -10,8 +10,9 @@ defineProps({
 
 const deleteArticle = (article) => {
     router.delete(route('articles.destroy', article), {
-        onBefore: () => confirm('Are you sure you want to delete this article?')
-    })
+        onBefore: () =>
+            confirm('Are you sure you want to delete this article?'),
+    });
 };
 </script>
 
@@ -23,19 +24,26 @@ const deleteArticle = (article) => {
         :key="article.id"
     >
         <h1 class="text-2xl font-semibold">{{ article.title }}</h1>
-        <div class="flex flex-row justify-between text-sm text-gray-900/50">
-            <p>{{ article.created_at.formatted }} | Written by {{ article.author }}</p>
 
-            <div v-if="article.can.update">
-                <Link
-                    class="rounded-sm border px-2 py-1 text-gray-500 transition-colors hover:border-blue-600 hover:text-blue-600"
-                    :href="route('articles.edit', article)"
-                >Edit</Link>
-            </div>
-
-            <div v-if="article.can.delete">
-                <button @click="deleteArticle(article)">Delete</button>
-            </div>
+        <div class="mt-2 flex flex-row justify-between text-sm text-gray-900/50">
+            <p>
+                {{ article.created_at.formatted }} | Written by
+                {{ article.author }}
+            </p>
+            <p>
+                <span
+                    class="rounded-lg px-2 py-1"
+                    :class="{
+                        'bg-green-200 text-green-800':
+                            article.status === 'published',
+                        'bg-red-200 text-red-800': article.status === 'draft',
+                        'bg-yellow-200 text-yellow-800':
+                            article.status === 'archived',
+                    }"
+                >
+                    {{ article.status.toUpperCase() }}
+                </span>
+            </p>
         </div>
     </Link>
 </template>

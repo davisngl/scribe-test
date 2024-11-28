@@ -1,12 +1,12 @@
 import '../css/app.css';
 import './bootstrap';
 
+import { notifications } from '@/Plugins/notifications.js';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
+import VueToastificationPlugin from 'vue-toastification';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
-import { notifications } from '@/Plugins/notifications.js';
-import VueToastificationPlugin from "vue-toastification";
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
