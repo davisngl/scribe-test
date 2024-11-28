@@ -1,6 +1,6 @@
 import { useToast } from 'vue-toastification';
 import { router, usePage } from '@inertiajs/vue3';
-import "vue-toastification/dist/index.css"
+import 'vue-toastification/dist/index.css';
 
 const toast = useToast();
 

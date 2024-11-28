@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\ArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\RedirectResponse;
@@ -33,7 +33,7 @@ class ArticleController extends Controller
         return Inertia::render('Articles/Create');
     }
 
-    public function store(StoreArticleRequest $request): RedirectResponse
+    public function store(ArticleRequest $request): RedirectResponse
     {
         Article::create($request->validated());
 
@@ -54,11 +54,11 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function update(StoreArticleRequest $request, Article $article): RedirectResponse
+    public function update(ArticleRequest $request, Article $article): RedirectResponse
     {
         $article->update($request->validated());
 
-        return back()->with('success', 'Article updated successfully');
+        return to_route('articles.index')->with('success', 'Article updated successfully');
     }
 
     public function destroy(Article $article)
