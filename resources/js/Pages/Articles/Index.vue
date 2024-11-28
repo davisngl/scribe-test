@@ -16,8 +16,9 @@ const deleteArticle = (article) => {
 </script>
 
 <template>
-    <div
-        class="mb-3 cursor-pointer rounded-lg p-5 transition-all duration-150 hover:bg-gray-100"
+    <Link
+        :href="route('articles.show', article)"
+        class="mb-3 block cursor-pointer rounded-lg p-5 transition-all duration-150 hover:bg-gray-100"
         v-for="article in articles.data"
         :key="article.id"
     >
@@ -36,5 +37,5 @@ const deleteArticle = (article) => {
                 <button @click="deleteArticle(article)">Delete</button>
             </div>
         </div>
-    </div>
+    </Link>
 </template>

@@ -43,7 +43,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         return Inertia::render('Articles/Show', [
-            'article' => ArticleResource::make($article),
+            'article' => ArticleResource::make($article->load('author:id,name')),
         ]);
     }
 

@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { router, useForm } from '@inertiajs/vue3';
+import { router, useForm, Link } from '@inertiajs/vue3';
 import TextArea from '@/Components/TextArea.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
@@ -27,9 +27,26 @@ const form = useForm({
 const submit = () => {
     form.patch(route('articles.update', props.article));
 };
+
+const navigateBack = () => {
+    if (form.isDirty) {
+        if (confirm('Are you sure you want to leave? Changes will be lost')) {
+            // Only issue is that if full page reload has happened on "edit" page
+            // there's no browser history to navigate "back to".
+            // Unlikely in usage but a bug.
+            router.visit(route('articles.index'));
+        }
+    } else {
+        router.visit(route('articles.index'));
+    }
+}
 </script>
 
 <template>
+    <button @click="navigateBack" class="mb-3 text-sm text-gray-700 underline">
+        &laquo; Go Back
+    </button>
+
     <form class="flex flex-col space-y-2" @submit.prevent="submit">
         <div>
             <InputLabel for="title" value="Article Title" />
