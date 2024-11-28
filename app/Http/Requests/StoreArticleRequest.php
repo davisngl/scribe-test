@@ -8,12 +8,12 @@ use App\Enums\ArticleStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ArticleRequest extends FormRequest
+class StoreArticleRequest extends FormRequest
 {
 	public function rules(): array
 	{
 		return [
-			'title'       => ['required', 'min:3', 'max:255'],
+			'title'       => ['required', 'min:3', 'max:255', 'unique:articles,title'],
 			'description' => ['required', 'min:10', 'max:65_535'],
 			'status'      => ['required', Rule::enum(ArticleStatus::class)],
 		];
