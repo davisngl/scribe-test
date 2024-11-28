@@ -35,7 +35,7 @@ class ArticleController extends Controller
 
     public function store(ArticleRequest $request): RedirectResponse
     {
-        Article::create($request->validated());
+        auth()->user()->articles()->create($request->validated());
 
         return back()->with('success', 'Article created successfully');
     }
@@ -65,6 +65,6 @@ class ArticleController extends Controller
     {
         $article->delete();
 
-        return back()->with('success', 'Article deleted successfully');
+        return to_route('articles.index')->with('success', 'Article deleted successfully');
     }
 }

@@ -21,9 +21,9 @@ const props = defineProps({
 });
 
 const form = useForm({
-    title: props.article.title,
-    status: props.article.status,
-    description: props.article.description,
+    title: '',
+    status: '',
+    description: '',
 });
 
 const submit = () => {
@@ -34,7 +34,7 @@ const submit = () => {
     });
 
     if (validation.passes()) {
-        form.patch(route('articles.update', props.article));
+        form.post(route('articles.store', props.article));
     } else {
         form.setError(validation.errors())
     }
@@ -100,7 +100,7 @@ const navigateBack = () => {
         </div>
 
         <div class="flex justify-end">
-            <PrimaryButton>Save Article</PrimaryButton>
+            <PrimaryButton>Create Article</PrimaryButton>
         </div>
     </form>
 </template>

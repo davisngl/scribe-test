@@ -9,9 +9,9 @@ defineProps({
 });
 
 const deleteArticle = (article) => {
-    if (confirm('Are you sure you want to delete this article?')) {
-        router.delete(route('articles.destroy', article));
-    }
+    router.delete(route('articles.destroy', article), {
+        onBefore: () => confirm('Are you sure you want to delete this article?')
+    })
 };
 </script>
 
