@@ -26,9 +26,6 @@ class ArticleResource extends JsonResource
                 'update' => auth()->user()->can('update', $this->resource),
                 'delete' => auth()->user()->can('delete', $this->resource),
             ],
-            'links'       => [
-                'edit' => route('articles.edit', $this->resource),
-            ],
         ];
     }
 }
