@@ -15,11 +15,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::resource('articles', ArticleController::class);
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('articles', ArticleController::class);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
