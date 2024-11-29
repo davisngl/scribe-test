@@ -10,7 +10,7 @@ class CountryLanguageRepository implements Contracts\FileRepositoryContract
 {
 	public function getFilePath(): string
 	{
-		return resource_path( 'data/country-language.json');
+		return resource_path( 'data/country-by-languages.json');
 	}
 
     /**

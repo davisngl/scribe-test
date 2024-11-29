@@ -4,7 +4,17 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, router, useForm } from "@inertiajs/vue3";
+import { ref, watch } from "vue";
+
+defineProps({
+    countries: {
+        type: Array,
+        required: true,
+    },
+});
+
+const languages = ref([])
 
 const form = useForm({
     name: '',
@@ -14,6 +24,12 @@ const form = useForm({
     password: '',
     password_confirmation: '',
 });
+
+watch(form.country, (country) => {
+    router.post(route('country.get-language'), { country }, {
+        onSuccess: (data) => languages.value = data
+    })
+})
 
 const submit = () => {
     form.post(route('register'), {
@@ -61,9 +77,16 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel for="country" value="Country" />
 
-                <select id="country" class="mt-1 block w-full" v-model="form.country" required>
+                <select
+                    id="country"
+                    class="mt-1 block w-full"
+                    v-model="form.country"
+                    required
+                >
                     <option value="">Select Country</option>
-                    <option :value="country" v-for="country in countries"></option>
+                    <option :value="country" v-for="country in countries">
+                        {{ country }}
+                    </option>
                 </select>
 
                 <InputError class="mt-2" :message="form.errors.country" />
@@ -72,12 +95,12 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel for="language" value="Country" />
 
-                <select id="language" class="mt-1 block w-full" v-model="form.language" required>
-                    <option value="">Select Language</option>
-                    <template v-if="languages.length">
-                        <option :value="language" v-for="language in languages"></option>
-                    </template>
-                </select>
+                <!--                <select id="language" class="mt-1 block w-full" v-model="form.language" required>-->
+                <!--                    <option value="">Select Language</option>-->
+                <!--                    <template v-if="languages.length">-->
+                <!--&lt;!&ndash;                        <option :value="language" v-for="language in languages"></option>&ndash;&gt;-->
+                <!--                    </template>-->
+                <!--                </select>-->
 
                 <InputError class="mt-2" :message="form.errors.language" />
             </div>

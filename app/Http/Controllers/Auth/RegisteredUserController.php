@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Repositories\Contracts\CountryLanguageRepositoryContract;
-use App\Repositories\Contracts\FileRepositoryContract;
 use App\Services\CountryLanguageService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
