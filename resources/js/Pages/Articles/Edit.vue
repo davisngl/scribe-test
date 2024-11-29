@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { router, useForm } from '@inertiajs/vue3';
+import { Head, router, useForm } from '@inertiajs/vue3';
 import TextArea from '@/Components/TextArea.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { isIn, isMax, isMin, isRequired } from 'intus/rules';
@@ -55,6 +55,10 @@ const navigateBack = () => {
 </script>
 
 <template>
+    <Head>
+        <title>Edit Article</title>
+    </Head>
+
     <button @click="navigateBack" class="mb-3 text-sm text-gray-700 underline">
         &laquo; Go Back
     </button>

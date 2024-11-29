@@ -33,9 +33,20 @@ const showingNavigationDropdown = ref(false);
                             >
                                 <NavLink
                                     :href="route('articles.index')"
-                                    :active="route().current('dashboard')"
+                                    :active="route().current('articles.index')"
                                 >
-                                    Dashboard
+                                    Blog
+                                </NavLink>
+                            </div>
+
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                            >
+                                <NavLink
+                                    :href="route('articles.create')"
+                                    :active="route().current('articles.create')"
+                                >
+                                    New Article
                                 </NavLink>
                             </div>
                         </div>
@@ -140,10 +151,18 @@ const showingNavigationDropdown = ref(false);
                     <div class="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
                             :href="route('articles.index')"
-                            :active="route().current('dashboard')"
+                            :active="route().current('articles.index')"
                         >
-                            Dashboard
+                            Blog
                         </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            :href="route('articles.create')"
+                            :active="route().current('articles.create')"
+                        >
+                            New Article
+                        </ResponsiveNavLink>
+
                     </div>
 
                     <!-- Responsive Settings Options -->

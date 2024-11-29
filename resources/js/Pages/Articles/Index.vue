@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Link, router, usePage } from '@inertiajs/vue3';
+import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import InputLabel from '@/Components/InputLabel.vue';
 import { computed, ref, watch } from 'vue';
 import SimplePaginator from '@/Components/Pagination/SimplePaginator.vue';
@@ -48,6 +48,10 @@ const resetFilters = () => {
 </script>
 
 <template>
+    <Head>
+        <title>Blog</title>
+    </Head>
+
     <div class="mb-5 inline-flex space-x-2 rounded-md border p-3">
         <div>
             <InputLabel id="status" label="Filter By Status" />

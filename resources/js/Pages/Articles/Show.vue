@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Link, router } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
 import DangerButton from '@/Components/DangerButton.vue';
 
 defineOptions({
@@ -22,6 +22,10 @@ const deleteArticle = (article) => {
 </script>
 
 <template>
+    <Head>
+        <title>{{ article.title }}</title>
+    </Head>
+
     <Link
         :href="route('articles.index')"
         class="mb-3 block text-sm text-gray-700 underline"
