@@ -9,6 +9,8 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 const form = useForm({
     name: '',
     email: '',
+    country: '',
+    language: '',
     password: '',
     password_confirmation: '',
 });
@@ -54,6 +56,30 @@ const submit = () => {
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="country" value="Country" />
+
+                <select id="country" class="mt-1 block w-full" v-model="form.country" required>
+                    <option value="">Select Country</option>
+                    <option :value="country" v-for="country in countries"></option>
+                </select>
+
+                <InputError class="mt-2" :message="form.errors.country" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="language" value="Country" />
+
+                <select id="language" class="mt-1 block w-full" v-model="form.language" required>
+                    <option value="">Select Language</option>
+                    <template v-if="languages.length">
+                        <option :value="language" v-for="language in languages"></option>
+                    </template>
+                </select>
+
+                <InputError class="mt-2" :message="form.errors.language" />
             </div>
 
             <div class="mt-4">
