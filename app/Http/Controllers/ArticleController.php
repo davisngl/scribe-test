@@ -44,7 +44,7 @@ class ArticleController extends Controller
                         value: $request->query('sort_direction'),
                         callback: static fn (Builder $query, string $sortDirection) => $query->orderBy('created_at', $sortDirection),
                     )
-                    ->paginate($request->query('per_page', 10))
+                    ->simplePaginate($request->query('per_page', 10))
                     ->withQueryString()
             ),
         ]);

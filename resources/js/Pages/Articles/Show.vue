@@ -22,7 +22,10 @@ const deleteArticle = (article) => {
 </script>
 
 <template>
-    <Link :href="route('articles.index')" class="block mb-3 text-sm text-gray-700 underline">
+    <Link
+        :href="route('articles.index')"
+        class="mb-3 block text-sm text-gray-700 underline"
+    >
         &laquo; Go Back
     </Link>
 
