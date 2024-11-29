@@ -13,16 +13,14 @@ const showingNavigationDropdown = ref(false);
 <template>
     <div>
         <div class="min-h-screen bg-gray-100">
-            <nav
-                class="border-b border-gray-100 bg-white"
-            >
+            <nav class="border-b border-gray-100 bg-white">
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 justify-between">
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('articles.index')">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800"
                                     />
@@ -34,10 +32,21 @@ const showingNavigationDropdown = ref(false);
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
                                 <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
+                                    :href="route('articles.index')"
+                                    :active="route().current('articles.index')"
                                 >
-                                    Dashboard
+                                    Blog
+                                </NavLink>
+                            </div>
+
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                            >
+                                <NavLink
+                                    :href="route('articles.create')"
+                                    :active="route().current('articles.create')"
+                                >
+                                    New Article
                                 </NavLink>
                             </div>
                         </div>
@@ -141,21 +150,25 @@ const showingNavigationDropdown = ref(false);
                 >
                     <div class="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
+                            :href="route('articles.index')"
+                            :active="route().current('articles.index')"
                         >
-                            Dashboard
+                            Blog
                         </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            :href="route('articles.create')"
+                            :active="route().current('articles.create')"
+                        >
+                            New Article
+                        </ResponsiveNavLink>
+
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div
-                        class="border-t border-gray-200 pb-1 pt-4"
-                    >
+                    <div class="border-t border-gray-200 pb-1 pt-4">
                         <div class="px-4">
-                            <div
-                                class="text-base font-medium text-gray-800"
-                            >
+                            <div class="text-base font-medium text-gray-800">
                                 {{ $page.props.auth.user.name }}
                             </div>
                             <div class="text-sm font-medium text-gray-500">
@@ -180,18 +193,29 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Heading -->
-            <header
-                class="bg-white shadow"
-                v-if="$slots.header"
-            >
+            <header class="bg-white shadow" v-if="$slots.header">
                 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <slot name="header" />
+                    <h2
+                        class="text-xl font-semibold leading-tight text-gray-800"
+                    >
+                        Dashboard
+                    </h2>
                 </div>
             </header>
 
             <!-- Page Content -->
             <main>
-                <slot />
+                <div class="py-12">
+                    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        <div
+                            class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
+                        >
+                            <div class="p-6 text-gray-900">
+                                <slot />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>

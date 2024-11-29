@@ -12,10 +12,19 @@ class ArticleRequest extends FormRequest
 {
 	public function rules(): array
 	{
-		return [
+		$ruleset = [
 			'title'       => ['required', 'min:3', 'max:255'],
-			'description' => ['required', 'min:10', 'max:65_535'],
+			'description' => ['required', 'min:10', 'max:65535'],
 			'status'      => ['required', Rule::enum(ArticleStatus::class)],
 		];
+
+        if (request()->routeIs('articles.store')) {
+            $ruleset['title'][] = 'unique:articles,title';
+        } else {
+            // On update requests, we can ignore being unique against itself.
+            $ruleset['title'][] = Rule::unique('articles', 'title')->ignore($this->route('article')->id);
+        }
+
+        return $ruleset;
 	}
 }
