@@ -21,11 +21,14 @@ class ArticleController extends Controller
         Gate::authorize('viewAny', Article::class);
 
         return Inertia::render('Articles/Index', [
-            'articles' => ArticleResource::collection(
+            'articles' => fn () => ArticleResource::collection(
                 Article::query()
                     ->with('author:id,name')
-                    ->latest()
                     ->select('id', 'user_id', 'status', 'title', 'description', 'created_at')
+                    ->when(
+                        value: !$request->query('sortDirection'),
+                        callback: static fn(Builder $query) => $query->latest(),
+                    )
                     ->when(
                         value: $request->query('status'),
                         callback: static function (Builder $query, string $status) {
@@ -38,15 +41,17 @@ class ArticleController extends Controller
                     )
                     ->when(
                         value: $request->query('date'),
-                        callback: static fn (Builder $query, string $date) => $query->whereDate('created_at', $date),
+                        callback: static fn(Builder $query, string $date) => $query->whereDate('created_at', $date),
                     )
                     ->when(
-                        value: $request->query('sort_direction'),
-                        callback: static fn (Builder $query, string $sortDirection) => $query->orderBy('created_at', $sortDirection),
+                        value: $request->query('sortDirection'),
+                        callback: static fn(Builder $query, string $sortDirection) => $query->orderBy('created_at',
+                            $sortDirection),
                     )
                     ->simplePaginate($request->query('per_page', 10))
                     ->withQueryString()
             ),
+            'existingFilters' => $request->only(['status', 'date', 'sortDirection']),
         ]);
     }
 

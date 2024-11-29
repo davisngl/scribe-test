@@ -14,7 +14,7 @@ readonly class CountryLanguageService
         private Repository $cache,
     ) {
         $this->rawPayload = $this->cache->remember(
-            key: 'country_language',
+            key: 'country_language', // these should be saved in enums/static constants tho
             ttl: static fn($items) => count($items) ? 0 : -1,
             callback: function () {
                 return collect($this->countryLanguageRepository->loadData())

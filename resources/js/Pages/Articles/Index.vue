@@ -7,14 +7,15 @@ import SimplePaginator from '@/Components/Pagination/SimplePaginator.vue';
 
 defineOptions({ layout: AuthenticatedLayout });
 
-defineProps({
+const props = defineProps({
     articles: { type: Object },
+    existingFilters: { type: Object },
 });
 
 const filters = ref({
-    status: 'any',
-    date: '',
-    sort_direction: 'desc',
+    status: props.existingFilters.status ?? 'any',
+    date: props.existingFilters.date ?? '',
+    sortDirection: props.existingFilters.sortDirection ?? 'desc',
 });
 
 const articleCount = computed(() => usePage().props.articles.data.length);
@@ -27,8 +28,9 @@ watch(
             {
                 status: filters.status,
                 date: filters.date,
-                sort_direction: filters.sort_direction,
+                sortDirection: filters.sortDirection,
             },
+
             {
                 preserveState: true,
                 only: ['articles'],
@@ -42,7 +44,7 @@ const resetFilters = () => {
     filters.value = {
         status: 'any',
         date: '',
-        sort_direction: 'desc',
+        sortDirection: 'desc',
     };
 };
 </script>
@@ -81,7 +83,7 @@ const resetFilters = () => {
             <select
                 class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 id="sort-direction"
-                v-model="filters.sort_direction"
+                v-model="filters.sortDirection"
             >
                 <option value="desc">Descending</option>
                 <option value="asc">Ascending</option>
@@ -90,10 +92,12 @@ const resetFilters = () => {
 
         <div class="flex items-center">
             <button
-                class="transition-colors hover:bg-gray-100 rounded-md px-2 py-1"
+                class="rounded-md px-2 py-1 transition-colors hover:bg-gray-100"
                 @click="resetFilters"
                 type="button"
-            >Reset Filters</button>
+            >
+                Reset Filters
+            </button>
         </div>
     </div>
 
@@ -114,18 +118,19 @@ const resetFilters = () => {
                     {{ article.author }}
                 </p>
                 <p>
-                <span
-                    class="rounded-lg px-2 py-1 text-xs font-semibold"
-                    :class="{
-                        'bg-green-200 text-green-800':
-                            article.status === 'published',
-                        'bg-red-200 text-red-800': article.status === 'draft',
-                        'bg-yellow-200 text-yellow-800':
-                            article.status === 'archived',
-                    }"
-                >
-                    {{ article.status.toUpperCase() }}
-                </span>
+                    <span
+                        class="rounded-lg px-2 py-1 text-xs font-semibold"
+                        :class="{
+                            'bg-green-200 text-green-800':
+                                article.status === 'published',
+                            'bg-red-200 text-red-800':
+                                article.status === 'draft',
+                            'bg-yellow-200 text-yellow-800':
+                                article.status === 'archived',
+                        }"
+                    >
+                        {{ article.status.toUpperCase() }}
+                    </span>
                 </p>
             </div>
         </Link>
