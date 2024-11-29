@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\FileRepositoryContract;
+use App\Repositories\CountryLanguageRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(
+            abstract: FileRepositoryContract::class,
+            concrete: CountryLanguageRepository::class,
+        );
     }
 
     /**
@@ -35,9 +40,9 @@ class AppServiceProvider extends ServiceProvider
         // Model specifics
         Model::unguard();
 
-        Model::preventAccessingMissingAttributes(! $isProduction);
-        Model::preventLazyLoading(! $isProduction);
-        Model::preventSilentlyDiscardingAttributes(! $isProduction);
+        Model::preventAccessingMissingAttributes(!$isProduction);
+        Model::preventLazyLoading(!$isProduction);
+        Model::preventSilentlyDiscardingAttributes(!$isProduction);
 
         // Command safety
         DB::prohibitDestructiveCommands($isProduction);
