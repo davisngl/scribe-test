@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Enums\ArticleStatus;
 use App\Http\Requests\ArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -26,10 +26,27 @@ class ArticleController extends Controller
                     ->with('author:id,name')
                     ->latest()
                     ->select('id', 'user_id', 'status', 'title', 'description', 'created_at')
+                    ->when(
+                        value: $request->query('status'),
+                        callback: static function (Builder $query, string $status) {
+                            if ($status === 'any') {
+                                return $query;
+                            }
+
+                            return $query->where('status', $status);
+                        },
+                    )
+                    ->when(
+                        value: $request->query('date'),
+                        callback: static fn (Builder $query, string $date) => $query->whereDate('created_at', $date),
+                    )
+                    ->when(
+                        value: $request->query('sort_direction'),
+                        callback: static fn (Builder $query, string $sortDirection) => $query->orderBy('created_at', $sortDirection),
+                    )
                     ->paginate($request->query('per_page', 10))
                     ->withQueryString()
             ),
-            'filter' => $request->enum('status', ArticleStatus::class),
         ]);
     }
 
