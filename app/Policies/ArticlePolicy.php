@@ -14,6 +14,10 @@ class ArticlePolicy
 
 	public function viewAny(User $user): bool
 	{
+        /**
+         * Normally, we should be having some sort of logic involving user permissions,
+         * but for the sake of example, this will do.
+         */
         return true;
 	}
 
