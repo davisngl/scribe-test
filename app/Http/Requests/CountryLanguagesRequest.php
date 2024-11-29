@@ -6,10 +6,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CountryLanguagesRequest extends FormRequest
 {
-	public function rules(): array
-	{
-		return [
-            'country' => ['required']
-		];
-	}
+    public function rules(): array
+    {
+        return [
+            'country' => ['required'],
+        ];
+    }
 }

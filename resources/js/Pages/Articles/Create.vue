@@ -38,11 +38,11 @@ const submit = () => {
             onSuccess: () => {
                 // Small trick to avoid double-flash
                 setTimeout(() => {
-                    router.visit(route('articles.index'),{
-                        only: ['articles']
+                    router.visit(route('articles.index'), {
+                        only: ['articles'],
                     });
                 }, 5);
-            }
+            },
         });
     } else {
         form.setError(validation.errors());

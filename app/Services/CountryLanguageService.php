@@ -15,7 +15,7 @@ readonly class CountryLanguageService
     ) {
         $this->rawPayload = $this->cache->remember(
             key: 'country_language', // these should be saved in enums/static constants tho
-            ttl: static fn($items) => count($items) ? 0 : -1,
+            ttl: static fn ($items) => count($items) ? 0 : -1,
             callback: function () {
                 return collect($this->countryLanguageRepository->loadData())
                     ->keyBy('country')
@@ -28,7 +28,7 @@ readonly class CountryLanguageService
     {
         return $this->cache->remember(
             key: 'countries',
-            ttl: static fn($items) => count($items) ? 0 : -1,
+            ttl: static fn ($items) => count($items) ? 0 : -1,
             callback: function () {
                 return collect($this->rawPayload)
                     ->keyBy('country')

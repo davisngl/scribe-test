@@ -22,7 +22,7 @@ class ArticleResource extends JsonResource
                 'raw'       => $this->created_at,
                 'formatted' => $this->created_at->format('d.m.Y H:i'),
             ],
-            'can'         => [
+            'can' => [
                 'update' => auth()->user()->can('update', $this->resource),
                 'delete' => auth()->user()->can('delete', $this->resource),
             ],

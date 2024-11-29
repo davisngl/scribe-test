@@ -40,9 +40,9 @@ class AppServiceProvider extends ServiceProvider
         // Model specifics
         Model::unguard();
 
-        Model::preventAccessingMissingAttributes(!$isProduction);
-        Model::preventLazyLoading(!$isProduction);
-        Model::preventSilentlyDiscardingAttributes(!$isProduction);
+        Model::preventAccessingMissingAttributes(! $isProduction);
+        Model::preventLazyLoading(! $isProduction);
+        Model::preventSilentlyDiscardingAttributes(! $isProduction);
 
         // Command safety
         DB::prohibitDestructiveCommands($isProduction);

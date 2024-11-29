@@ -37,7 +37,7 @@ watch(
 
         axios
             .post(route('countries.get-languages'), { country })
-            .then(({ data }) => languages.value = data)
+            .then(({ data }) => (languages.value = data))
             .catch(({ response }) => notification.error(response.data.message));
     },
     { deep: true },
@@ -124,10 +124,9 @@ const submit = () => {
                 >
                     <option value="">Select Language</option>
                     <template v-if="languages.length">
-                        <option
-                            :value="language"
-                            v-for="language in languages"
-                        >{{ language }}</option>
+                        <option :value="language" v-for="language in languages">
+                            {{ language }}
+                        </option>
                     </template>
                 </select>
 
