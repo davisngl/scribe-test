@@ -22,8 +22,8 @@ class ArticleFactory extends Factory
             'title'       => $this->faker->realText(100),
             'description' => $this->faker->realText(1000),
             'status'      => Arr::random(ArticleStatus::cases()),
-            'created_at'  => Carbon::now(),
-            'updated_at'  => Carbon::now(),
+            'created_at'  => $createdAt = Carbon::now()->addMinutes(random_int(1, 59)),
+            'updated_at'  => $createdAt,
         ];
     }
 }
