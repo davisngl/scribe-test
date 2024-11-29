@@ -7,3 +7,7 @@ Project is using Laravel Sail to set it up.
 4. Turn off locally running MySQL, Redis and Nginx (if applicable) as port interfering will happen when running Sail
 5. `./vendor/bin/sail up -d` to start the project (slow initally as images need to be pulled) 
 6. `./vendor/bin/sail artisan migrate --seed` to run migrations and seed dummy data
+
+## Mail (using Mailpit)
+
+To check received mail (in case of password recovery), visit `http://127.0.0.1:8025`
