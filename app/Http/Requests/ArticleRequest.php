@@ -10,13 +10,13 @@ use Illuminate\Validation\Rule;
 
 class ArticleRequest extends FormRequest
 {
-	public function rules(): array
-	{
-		$ruleset = [
-			'title'       => ['required', 'min:3', 'max:255'],
-			'description' => ['required', 'min:10', 'max:65535'],
-			'status'      => ['required', Rule::enum(ArticleStatus::class)],
-		];
+    public function rules(): array
+    {
+        $ruleset = [
+            'title'       => ['required', 'min:3', 'max:255'],
+            'description' => ['required', 'min:10', 'max:65535'],
+            'status'      => ['required', Rule::enum(ArticleStatus::class)],
+        ];
 
         if (request()->routeIs('articles.store')) {
             $ruleset['title'][] = 'unique:articles,title';
@@ -26,5 +26,5 @@ class ArticleRequest extends FormRequest
         }
 
         return $ruleset;
-	}
+    }
 }

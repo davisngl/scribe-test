@@ -162,7 +162,6 @@ const showingNavigationDropdown = ref(false);
                         >
                             New Article
                         </ResponsiveNavLink>
-
                     </div>
 
                     <!-- Responsive Settings Options -->

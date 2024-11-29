@@ -22,7 +22,7 @@ defineProps({
             class="flex items-center justify-center rounded-lg px-3 py-2 text-sm text-gray-800"
             :class="{
                 'bg-gray-200': pagination.prev,
-                '!text-gray-300': ! pagination.prev,
+                '!text-gray-300': !pagination.prev,
             }"
         >
             Previous
